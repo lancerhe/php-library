@@ -19,9 +19,10 @@ class Util_Validate{
      * @example Util_Validate::isEmailAddr( 'lancer.he@gmail.com' );
      */
     public static function isEmailAddr($string) {
-        $RegExp = '/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*$/';
+        $RegExp = '/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/';
+        //$RegExp = '/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*$/';
         //$RegExp = '/^[a-z0-9][a-z\.0-9-_]+@[a-z0-9_-]+(?:\.[a-z]{0,3}\.[a-z]{0,2}|\.[a-z]{0,3}|\.[a-z]{0,2})$/i';
-        return preg_match($RegExp, $string) ? TRUE : FALSE;
+        return preg_match($RegExp, $string) ? true : false;
     }
 
 
@@ -35,8 +36,8 @@ class Util_Validate{
      * @example Util_Validate::isHttpUrl( 'http://www.baidu.com' );
      */
     public static function isHttpUrl($string) {
-        $RegExp = '/^http:\/\/[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*$/';
-        return preg_match($RegExp, $string) ? TRUE : FALSE;
+        $RegExp = '/^http|https:\/\/[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*$/';
+        return preg_match($RegExp, $string) ? true : false;
     }
 
 
@@ -50,9 +51,9 @@ class Util_Validate{
      * @example Util_Validate::isEmptyString( 'A' );
      */
     public static function isEmptyString($string) {
-        if ( ! is_string($string)) return FALSE;
+        if ( ! is_string($string)) return false;
         $string = trim($string);
-        return $string == '' ? TRUE : FALSE;
+        return $string == '' ? true : false;
     }
 
 
@@ -67,7 +68,7 @@ class Util_Validate{
      */
     public static function isNumber($string){
         $RegExp = '/^[0-9]*$/';
-        return preg_match($RegExp,$string) ? TRUE : FALSE;
+        return preg_match($RegExp,$string) ? true : false;
     }
 
 
@@ -84,16 +85,16 @@ class Util_Validate{
      */
     public static function isLengthBetween($string, $min=4, $max=16, $charset='gb2312') {
         $string = trim($string);
-        if ( ! in_array($charset, array('gb2312', 'utf8') ) ) return FALSE;
+        if ( ! in_array($charset, array('gb2312', 'utf-8') ) ) return false;
         if ( $charset == 'gb2312' ) {
             $string = iconv("utf-8", "gbk", $string);
             $length = strlen($string);
         } else {
             $length = mb_strlen($string, $charset);
         }
-        if ( strlen($string) < $min ) return FALSE;
-        if ( strlen($string) > $max ) return FALSE;
-        return TRUE;
+        if ( $length < $min ) return false;
+        if ( $length > $max ) return false;
+        return true;
     }
 
 
@@ -109,9 +110,9 @@ class Util_Validate{
      * @example Util_Validate::isValueBetween( 97, 4 ,10);
      */
     public static function isValueBetween($number, $min, $max) {
-        if ( $number > $max ) return FALSE;
-        if ( $number < $min ) return FALSE;
-        return TRUE;
+        if ( $number > $max ) return false;
+        if ( $number < $min ) return false;
+        return true;
     }
 
 
@@ -127,9 +128,9 @@ class Util_Validate{
      * @example Util_Validate::isUsername( 'Lancer' );
      */
     public static function isUsername($string, $min=4, $max=16){
-        if ( ! self::IsLengthBetween($string, $min, $max) ) return FALSE;
+        if ( ! self::IsLengthBetween($string, $min, $max) ) return false;
         $RegExp = '/^[\x80-\xff_a-zA-Z0-9]/';
-        return preg_match($RegExp, $string) ? TRUE : FALSE;
+        return preg_match($RegExp, $string) ? true : false;
     }
 
 
@@ -145,9 +146,9 @@ class Util_Validate{
      * @example Util_Validate::isPassword( 'Lancer' );
      */
     public static function isPassword($string, $min=4, $max=16){
-        if ( ! self::isLengthBetween($string, $min, $max)) return FALSE;
+        if ( ! self::isLengthBetween($string, $min, $max)) return false;
         $RegExp = '/^[_a-zA-Z0-9]*$/';
-        return preg_match($RegExp,$string) ? TRUE : FALSE;
+        return preg_match($RegExp,$string) ? true : false;
     }
 
 
@@ -162,7 +163,7 @@ class Util_Validate{
      * @example Util_Validate::isSame( 'Lancer', 'Lancer2' );
      */
     public static function isSame($string_1, $string_2) {
-        return $string_1 === $string_2 ? TRUE : FALSE;
+        return $string_1 === $string_2 ? true : false;
     }
 
 
@@ -177,7 +178,7 @@ class Util_Validate{
      */
     public static function isMobile($string) {
         $RegExp = '/^(?:13|15|18)[0-9]{9}$/';
-        return preg_match($RegExp,$string) ? TRUE : FALSE;
+        return preg_match($RegExp,$string) ? true : false;
     }
 
 
@@ -193,7 +194,7 @@ class Util_Validate{
     public static function isNickname($string) {
         //Copy From DZ
         $RegExp = '/^\s*$|^c:\\con\\con$|[%,\*\"\s\t\<\>\&\'\(\)]|\xA1\xA1|\xAC\xA3|^Guest|^\xD3\xCE\xBF\xCD|\xB9\x43\xAB\xC8/is';
-        return preg_match($RegExp,$string) ? FALSE : TRUE;
+        return preg_match($RegExp,$string) ? false : true;
     }
 
 
@@ -208,7 +209,7 @@ class Util_Validate{
      */
     public static function isChinese($string, $Encoding='utf8') {
         $RegExp = $Encoding == 'utf8' ? '/^[\x{4e00}-\x{9fa5}]+$/u' : '/^([\x80-\xFF][\x80-\xFF])+$/';
-        return preg_match($RegExp,$string) ? TRUE : FALSE;
+        return preg_match($RegExp,$string) ? true : false;
     }
 
     /**
@@ -222,7 +223,7 @@ class Util_Validate{
      */
     public static function isContainsChinese($string) {
         $RegExp = '/([\x81-\xfe][\x40-\xfe])/';
-        return preg_match($RegExp,$string) ? TRUE : FALSE;
+        return preg_match($RegExp,$string) ? true : false;
     }
 
     /**
@@ -236,7 +237,7 @@ class Util_Validate{
      */
     public static function isDSN($string){       //have bug!
         $RegExp = '/^(?:[a-z]{3,12}:\/\/[^:]+:[^@]+@[^:]+:[^\/]+\/[a-z_][a-z0-9_]+|[a-z]{5,12}:\/\/[^:]+:[^@]+@[^\/]+\/[a-z_][a-z0-9_]+|[a-z]{5,12}:\/\/[^@]+@[^:]+:[^\/]+\/[a-z_][a-z0-9_]+|[a-z]{5,12}:\/\/[^@]+@[^\/]+\/[a-z_][a-z0-9_]+)$/';
-        return preg_match($RegExp, $string) ? TRUE : FALSE;
+        return preg_match($RegExp, $string) ? true : false;
     }
 
 
@@ -251,7 +252,7 @@ class Util_Validate{
      */
     public static function isIpAddr($IP) {
         $result = ip2long($IP);
-        return ($result == -1 || $result == FALSE) ? FALSE : TRUE;
+        return ($result == -1 || $result == false) ? false : true;
     }
 
 
@@ -267,10 +268,10 @@ class Util_Validate{
     public static function isIDCard($id_card){
         //identification card  18 bits
         if (strlen($id_card) != 15 && strlen($id_card) != 18 ) {
-            return FALSE ;
+            return false ;
         }
         $RegExp = '#^[0-9]{14,17}[0-9xX]{1,1}$#si';
-        return preg_match($RegExp, $id_card) ? TRUE : FALSE;
+        return preg_match($RegExp, $id_card) ? true : false;
     }
 }
 ?>
