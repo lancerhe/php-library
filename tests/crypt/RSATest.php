@@ -1,15 +1,15 @@
 <?php
 /**
- * Crypt_Rsa Library Test
+ * Crypt_RSA Library Test
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-10-27
  */
-require dirname(__FILE__) . '/../../libraries/crypt/Rsa.php';
+require dirname(__FILE__) . '/../../libraries/crypt/RSA.php';
 
-class Crypt_RsaTest extends PHPUnit_Framework_TestCase {
+class Crypt_RSATest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        $this->crypt = new Crypt_Rsa();
+        $this->crypt = new Crypt_RSA();
     }
 
     /**

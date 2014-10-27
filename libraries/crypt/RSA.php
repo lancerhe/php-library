@@ -1,8 +1,8 @@
 <?php
 /**
- * @desc Crypt_Rsa加解密类
+ * @desc Crypt_RSA加解密类
  */
-Class Crypt_Rsa {
+Class Crypt_RSA {
 
     protected $_private_key;
 

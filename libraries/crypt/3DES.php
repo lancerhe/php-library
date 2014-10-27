@@ -1,9 +1,9 @@
 <?php
 /**
- * @desc Crypt_3Des加解密类
+ * @desc Crypt_3DES加解密类
  * @notice 可与java的3DES(DESede)加密方式兼容
  */
-Class Crypt_3Des {  
+Class Crypt_3DES {  
 
     /**
      * @desc   加密

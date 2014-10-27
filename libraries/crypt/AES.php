@@ -1,10 +1,10 @@
 <?php
 /**
- * @desc Crypt_Aes加解密类
+ * @desc Crypt_AES加解密类
  * @author Alexander_Li
  * @notice 本类使用前需要安装extension=php_mcrypt.dll扩展
  */
-class Crypt_Aes {
+class Crypt_AES {
 
     /**
      * @desc
