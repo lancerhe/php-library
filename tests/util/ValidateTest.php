@@ -110,7 +110,7 @@ class Util_ValidateTest extends PHPUnit_Framework_TestCase {
     }
 
 
-    public function providerUsername() {
+    public static function providerUsername() {
         return array(
             array(true,  'sd6192709', 4, 16),
             array(false, 'sd6', 4, 16 ),
@@ -127,7 +127,7 @@ class Util_ValidateTest extends PHPUnit_Framework_TestCase {
     }
 
 
-    public function providerPassword() {
+    public static function providerPassword() {
         return array(
             array(true,  '1234567', 4, 16),
             array(false, '装个虚拟机', 4, 16),
@@ -144,7 +144,7 @@ class Util_ValidateTest extends PHPUnit_Framework_TestCase {
     }
 
 
-    public function providerSame() {
+    public static function providerSame() {
         return array(
             array(true,  '1234567',  '1234567'),
             array(false, '装个虚拟机', '装个虚拟'),
@@ -163,7 +163,7 @@ class Util_ValidateTest extends PHPUnit_Framework_TestCase {
     }
 
 
-    public function providerMobile() {
+    public static function providerMobile() {
         return array(
             array(true,  '15960720246'),
             array(false, '12960720246'),
@@ -177,5 +177,87 @@ class Util_ValidateTest extends PHPUnit_Framework_TestCase {
      */
     public function validateMobile($expected, $string) {
         $this->assertEquals($expected, Util_Validate::isMobile($string) );
+    }
+
+    public static function providerNickname() {
+        return array(
+            array(true, 'LancerHe'),
+            array(true, '风花雪月'),
+            array(false,'Lancer He'),
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider  providerNickname
+     */
+    public function validateNickname($expected, $string) {
+        $this->assertEquals($expected, Util_Validate::isNickname($string));
+    }
+
+    public static function providerChinese() {
+        return array(
+            array(true,  '风花雪月'),
+            array(false, 'MyName'),
+            array(false, '由此开始Tiny'),
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providerChinese
+     */
+    public function validateChinese($expected, $string) {
+        $this->assertEquals($expected, Util_Validate::isChinese($string));
+    }
+
+    public static function providerContainsChinese() {
+        return array(
+            array(true,  '风花雪月'),
+            array(false, 'MyName'),
+            array(true,  '由此开始Tiny'),
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providerContainsChinese
+     */
+    public function validateContainsChinese($expected, $string) {
+        $this->assertEquals($expected, Util_Validate::isContainsChinese($string));
+    }
+
+    public static function providerIpAddr() {
+        return array(
+            array(true, '217.0.0.1'),
+            array(true, '192.168.1.1'),
+            array(false,'262.0.0.1'),
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providerIpAddr
+     */
+    public function validateIpAddr($expected, $string) {
+        $this->assertEquals($expected, Util_Validate::isIpAddr($string));
+    }
+
+    public static function providerIdCard() {
+        return array(
+            array(false,'3501128702121222322'),
+            array(false,'350104198625141254'),
+            array(true, '350112198702123343'),
+            array(false,'35011287021232x'),
+            array(true ,'350112870212132'),
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providerIdCard
+     */
+    public function validateIdCard($expected, $string) {
+        $this->assertEquals($expected, Util_Validate::isIdCard($string));
     }
 }

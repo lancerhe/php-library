@@ -19,10 +19,10 @@ class Util_Validate{
      * @example Util_Validate::isEmailAddr( 'lancer.he@gmail.com' );
      */
     public static function isEmailAddr($string) {
-        $RegExp = '/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/';
-        //$RegExp = '/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*$/';
-        //$RegExp = '/^[a-z0-9][a-z\.0-9-_]+@[a-z0-9_-]+(?:\.[a-z]{0,3}\.[a-z]{0,2}|\.[a-z]{0,3}|\.[a-z]{0,2})$/i';
-        return preg_match($RegExp, $string) ? true : false;
+        $regexp = '/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/';
+        //$regexp = '/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*$/';
+        //$regexp = '/^[a-z0-9][a-z\.0-9-_]+@[a-z0-9_-]+(?:\.[a-z]{0,3}\.[a-z]{0,2}|\.[a-z]{0,3}|\.[a-z]{0,2})$/i';
+        return preg_match($regexp, $string) ? true : false;
     }
 
 
@@ -36,8 +36,8 @@ class Util_Validate{
      * @example Util_Validate::isHttpUrl( 'http://www.baidu.com' );
      */
     public static function isHttpUrl($string) {
-        $RegExp = '/^http|https:\/\/[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*$/';
-        return preg_match($RegExp, $string) ? true : false;
+        $regexp = '/^http|https:\/\/[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*$/';
+        return preg_match($regexp, $string) ? true : false;
     }
 
 
@@ -67,8 +67,8 @@ class Util_Validate{
      * @example Util_Validate::isNumber( '2131' );
      */
     public static function isNumber($string){
-        $RegExp = '/^[0-9]*$/';
-        return preg_match($RegExp,$string) ? true : false;
+        $regexp = '/^[0-9]*$/';
+        return preg_match($regexp,$string) ? true : false;
     }
 
 
@@ -129,8 +129,8 @@ class Util_Validate{
      */
     public static function isUsername($string, $min=4, $max=16){
         if ( ! self::IsLengthBetween($string, $min, $max) ) return false;
-        $RegExp = '/^[\x80-\xff_a-zA-Z0-9]/';
-        return preg_match($RegExp, $string) ? true : false;
+        $regexp = '/^[\x80-\xff_a-zA-Z0-9]/';
+        return preg_match($regexp, $string) ? true : false;
     }
 
 
@@ -147,8 +147,8 @@ class Util_Validate{
      */
     public static function isPassword($string, $min=4, $max=16){
         if ( ! self::isLengthBetween($string, $min, $max)) return false;
-        $RegExp = '/^[_a-zA-Z0-9]*$/';
-        return preg_match($RegExp,$string) ? true : false;
+        $regexp = '/^[_a-zA-Z0-9]*$/';
+        return preg_match($regexp,$string) ? true : false;
     }
 
 
@@ -177,8 +177,8 @@ class Util_Validate{
      * @example Util_Validate::isMobile( '15960720246' );
      */
     public static function isMobile($string) {
-        $RegExp = '/^(?:13|15|18)[0-9]{9}$/';
-        return preg_match($RegExp,$string) ? true : false;
+        $regexp = '/^(?:13|15|18)[0-9]{9}$/';
+        return preg_match($regexp,$string) ? true : false;
     }
 
 
@@ -193,8 +193,8 @@ class Util_Validate{
      */
     public static function isNickname($string) {
         //Copy From DZ
-        $RegExp = '/^\s*$|^c:\\con\\con$|[%,\*\"\s\t\<\>\&\'\(\)]|\xA1\xA1|\xAC\xA3|^Guest|^\xD3\xCE\xBF\xCD|\xB9\x43\xAB\xC8/is';
-        return preg_match($RegExp,$string) ? false : true;
+        $regexp = '/^\s*$|^c:\\con\\con$|[%,\*\"\s\t\<\>\&\'\(\)]|\xA1\xA1|\xAC\xA3|^Guest|^\xD3\xCE\xBF\xCD|\xB9\x43\xAB\xC8/is';
+        return preg_match($regexp,$string) ? false : true;
     }
 
 
@@ -208,8 +208,8 @@ class Util_Validate{
      * @example Util_Validate::isChinese( '风华正茂' );
      */
     public static function isChinese($string, $Encoding='utf8') {
-        $RegExp = $Encoding == 'utf8' ? '/^[\x{4e00}-\x{9fa5}]+$/u' : '/^([\x80-\xFF][\x80-\xFF])+$/';
-        return preg_match($RegExp,$string) ? true : false;
+        $regexp = $Encoding == 'utf8' ? '/^[\x{4e00}-\x{9fa5}]+$/u' : '/^([\x80-\xFF][\x80-\xFF])+$/';
+        return preg_match($regexp,$string) ? true : false;
     }
 
     /**
@@ -222,22 +222,8 @@ class Util_Validate{
      * @example Util_Validate::isContainsChinese( '风华正茂' );
      */
     public static function isContainsChinese($string) {
-        $RegExp = '/([\x81-\xfe][\x40-\xfe])/';
-        return preg_match($RegExp,$string) ? true : false;
-    }
-
-    /**
-     * isDSN 是否为DSN
-     *
-     * @access public
-     * @static
-     * @param string $string
-     * @return boolean
-     * @example Util_Validate::isDSN( '' );
-     */
-    public static function isDSN($string){       //have bug!
-        $RegExp = '/^(?:[a-z]{3,12}:\/\/[^:]+:[^@]+@[^:]+:[^\/]+\/[a-z_][a-z0-9_]+|[a-z]{5,12}:\/\/[^:]+:[^@]+@[^\/]+\/[a-z_][a-z0-9_]+|[a-z]{5,12}:\/\/[^@]+@[^:]+:[^\/]+\/[a-z_][a-z0-9_]+|[a-z]{5,12}:\/\/[^@]+@[^\/]+\/[a-z_][a-z0-9_]+)$/';
-        return preg_match($RegExp, $string) ? true : false;
+        $regexp = '/([\x81-\xfe][\x40-\xfe])/';
+        return preg_match($regexp,$string) ? true : false;
     }
 
 
@@ -257,7 +243,7 @@ class Util_Validate{
 
 
     /**
-     * isIDCard 是否为省份证件号
+     * isIDCard 是否为身份证件号
      * 
      * @access public
      * @static
@@ -270,8 +256,16 @@ class Util_Validate{
         if (strlen($id_card) != 15 && strlen($id_card) != 18 ) {
             return false ;
         }
-        $RegExp = '#^[0-9]{14,17}[0-9xX]{1,1}$#si';
-        return preg_match($RegExp, $id_card) ? true : false;
+        $regexp = '/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/';
+        if ( preg_match($regexp, $id_card) ) {
+            return true;
+        }
+
+        $regexp = '/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|x|X)$/';
+        if ( preg_match($regexp, $id_card) ) {
+            return true;
+        }
+        return false;
     }
 }
 ?>
