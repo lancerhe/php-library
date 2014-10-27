@@ -131,4 +131,54 @@ class Util_ArrayTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(array(), Util_Array::column($this->array, 'last_name') );
     }
+
+    /**
+     * @test
+     */
+    public function mutisortAsc() {
+        $array = array(
+            array('id' => 2, 'name'=>'lancer', 'age'=>18),
+            array('id' => 3, 'name'=>'chart',  'age'=>17),
+            array('id' => 4, 'name'=>'chart',  'age'=>19),
+        );
+        $result = Util_Array::mutisort($array, 'age');
+        $this->assertEquals(array(
+            array('id' => 3, 'name'=>'chart',  'age'=>17),
+            array('id' => 2, 'name'=>'lancer', 'age'=>18),
+            array('id' => 4, 'name'=>'chart',  'age'=>19),
+        ), $result);
+    }
+
+    /**
+     * @test
+     */
+    public function mutisortDesc() {
+        $array = array(
+            array('id' => 2, 'name'=>'lancer', 'age'=>18),
+            array('id' => 3, 'name'=>'chart',  'age'=>17),
+            array('id' => 4, 'name'=>'chart',  'age'=>19),
+        );
+        $result = Util_Array::mutisort($array, 'age', SORT_DESC);
+        $this->assertEquals(array(
+            array('id' => 4, 'name'=>'chart',  'age'=>19),
+            array('id' => 2, 'name'=>'lancer', 'age'=>18),
+            array('id' => 3, 'name'=>'chart',  'age'=>17),
+        ), $result);
+    }
+
+    /**
+     * @test
+     */
+    public function mutisortWithParamtersNotCorrect() {
+        $this->setExpectedException('PHPUnit_Framework_Error');
+        Util_Array::mutisort(null, 'age');
+    }
+
+    /**
+     * @test
+     */
+    public function mutisortWithMutiRowsNotCorrect() {
+        $result = Util_Array::mutisort(array('1', '2'), 'age');
+        $this->assertEquals(array('1', '2'), $result);
+    }
 }

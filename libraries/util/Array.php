@@ -102,4 +102,30 @@ class Util_Array{
             return array_column($input, $column_key, $index_key);
         }
     }
+
+    /**
+     * sort 二维数组排序
+     * 
+     * @access public
+     * @static
+     * @param $array  二维数组
+     * @param $key    排序键名
+     * @param $type   升序降序
+     * @example $array = array(
+     *              array('id' => 2, 'name'=>'lancer', 'age'=>18),
+     *              array('id' => 3, 'name'=>'chart', 'age'=>17),
+     *          );
+     *          $result = Util_Array::sort($array, 'id', 'desc');
+     */
+    public static function mutisort($multi_array, $sort_field, $sort_type = SORT_ASC){
+        if ( ! is_array($multi_array) ) 
+            trigger_error('mutisort(): The first parameter should be array', E_USER_WARNING);
+
+        foreach ($multi_array as $row){
+            if ( ! is_array($row) ) return $multi_array;
+            $arr_field[] = $row[$sort_field];
+        }
+        array_multisort($arr_field,$sort_type,$multi_array);
+        return $multi_array;
+    }
 }
