@@ -24,4 +24,30 @@ class Util_Client {
         }
         return 'unknown';
     }
+
+
+    /**
+     * @return string
+     */
+    public static function getBrowser() {
+        if ( ! isset($_SERVER['HTTP_USER_AGENT']) ) 
+            return 'unknown';
+
+        $u_agent = $_SERVER['HTTP_USER_AGENT'];
+        if(preg_match('/MSIE/i',$u_agent))
+            return "Internet Explorer";
+        elseif(preg_match('/Firefox/i',$u_agent))
+            return "Mozilla Firefox";
+        elseif(preg_match('/Safari/i',$u_agent))
+            return "Apple Safari";
+        elseif(preg_match('/Chrome/i',$u_agent))
+            return "Google Chrome";
+        elseif(preg_match('/Flock/i',$u_agent))
+            return "Flock";
+        elseif(preg_match('/Opera/i',$u_agent))
+            return "Opera";
+        elseif(preg_match('/Netscape/i',$u_agent))
+            return "Netscape";
+        return 'unknown';
+    }
 }
