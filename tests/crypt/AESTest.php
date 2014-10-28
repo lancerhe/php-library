@@ -4,7 +4,7 @@
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-10-27
  */
-require dirname(__FILE__) . '/../../libraries/crypt/AES.php';
+require_once dirname(__FILE__) . '/../../libraries/crypt/AES.php';
 
 class Crypt_AESTest extends PHPUnit_Framework_TestCase {
 

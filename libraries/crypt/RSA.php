@@ -15,8 +15,12 @@ Class Crypt_RSA {
      * @param  string $path
      * @throws Exception
      */
-    public function __construct() {
+    public function __construct($key_path = '') {
+        if ( $key_path ) 
+            $this->_key_path = $key_path;
+
         $this->_key_path = rtrim($this->_key_path, '/');
+
         if ( ! is_dir($this->_key_path) ) 
             mkdir($this->_key_path, 0755, true);
     }

@@ -19,7 +19,7 @@ class Util_Log {
      * @return void
      */
     public static function write($output, $log_file) {
-        $log_file   = self::$log_path . ltrim($log_file, '/');
+        $log_file   = rtrim(self::$log_path , '/') . '/' . ltrim($log_file, '/');
         $path_parts = pathinfo($log_file);
         $log_folder = $path_parts["dirname"];
         if ( ! is_dir($log_folder) ) {

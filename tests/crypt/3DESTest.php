@@ -4,7 +4,7 @@
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-10-27
  */
-require dirname(__FILE__) . '/../../libraries/crypt/3DES.php';
+require_once dirname(__FILE__) . '/../../libraries/crypt/3DES.php';
 
 class Crypt_3DESTest extends PHPUnit_Framework_TestCase {
 

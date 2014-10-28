@@ -4,7 +4,7 @@
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-04-15
  */
-require dirname(__FILE__) . '/../../libraries/util/Validate.php';
+require_once dirname(__FILE__) . '/../../libraries/util/Validate.php';
 
 class Util_ValidateTest extends PHPUnit_Framework_TestCase {
     

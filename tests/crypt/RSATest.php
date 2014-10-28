@@ -4,12 +4,12 @@
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-10-27
  */
-require dirname(__FILE__) . '/../../libraries/crypt/RSA.php';
+require_once dirname(__FILE__) . '/../../libraries/crypt/RSA.php';
 
 class Crypt_RSATest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        $this->crypt = new Crypt_RSA();
+        $this->crypt = new Crypt_RSA('/tmp/rsakey/');
     }
 
     /**
@@ -17,8 +17,8 @@ class Crypt_RSATest extends PHPUnit_Framework_TestCase {
      */
     public function createKey() {
         $this->crypt->createKey();
-        $this->assertTrue(file_exists('/tmp/phprsa/priv.key'));
-        $this->assertTrue(file_exists('/tmp/phprsa/pub.key'));
+        $this->assertTrue(file_exists('/tmp/rsakey/priv.key'));
+        $this->assertTrue(file_exists('/tmp/rsakey/pub.key'));
     }
 
     /**
@@ -47,7 +47,7 @@ class Crypt_RSATest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function getPublicKeyModulus() {
-        file_put_contents('/tmp/phprsa/priv.key', '-----BEGIN PRIVATE KEY-----
+        file_put_contents('/tmp/rsakey/priv.key', '-----BEGIN PRIVATE KEY-----
 MIIBVgIBADANBgkqhkiG9w0BAQEFAASCAUAwggE8AgEAAkEAm/QglXWYhrTBqOKM
 1SrW+Fp17U+U4QMFuc0MATMSHO8uS4nAeclNj3tIf2wVeiqVRMN2Pob4IoUX9eu/
 YkUmvQIDAQABAkBFVwdBzNZzVl0gzRIXGYQZSodSa2bjoOdj1EJ5Kg7so845xjuO
@@ -105,8 +105,7 @@ Xj+dGaf/SnaHMg==
     }
 
     public function tearDown() {
-        if ( file_exists('/tmp/phprsa/priv.key') ) unlink('/tmp/phprsa/priv.key');
-        if ( file_exists('/tmp/phprsa/pub.key') )  unlink('/tmp/phprsa/pub.key');
+        exec("rm -rf /tmp/rsakey");
         unset($this->crypt);
     }
 }
