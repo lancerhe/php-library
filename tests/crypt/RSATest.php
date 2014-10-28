@@ -9,7 +9,7 @@ require_once dirname(__FILE__) . '/../../libraries/crypt/RSA.php';
 class Crypt_RSATest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        $this->crypt = new Crypt_RSA('/tmp/rsakey/');
+        $this->crypt = new Crypt_RSA('/tmp/phpunit/');
     }
 
     /**
@@ -17,8 +17,8 @@ class Crypt_RSATest extends PHPUnit_Framework_TestCase {
      */
     public function createKey() {
         $this->crypt->createKey();
-        $this->assertTrue(file_exists('/tmp/rsakey/priv.key'));
-        $this->assertTrue(file_exists('/tmp/rsakey/pub.key'));
+        $this->assertTrue(file_exists('/tmp/phpunit/priv.key'));
+        $this->assertTrue(file_exists('/tmp/phpunit/pub.key'));
     }
 
     /**
@@ -47,19 +47,9 @@ class Crypt_RSATest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function getPublicKeyModulus() {
-        file_put_contents('/tmp/rsakey/priv.key', '-----BEGIN PRIVATE KEY-----
-MIIBVgIBADANBgkqhkiG9w0BAQEFAASCAUAwggE8AgEAAkEAm/QglXWYhrTBqOKM
-1SrW+Fp17U+U4QMFuc0MATMSHO8uS4nAeclNj3tIf2wVeiqVRMN2Pob4IoUX9eu/
-YkUmvQIDAQABAkBFVwdBzNZzVl0gzRIXGYQZSodSa2bjoOdj1EJ5Kg7so845xjuO
-oj7qMSvMplw3xN9vVOclE1O1T/GL5rkI4AoVAiEAyzMI1dntzlFeUSbapoIOn7uk
-HGCL3ylF+b8sjwAR+GcCIQDEekXrSxaMVoJ5QiVqzcDuVqodC6KD92DYwdqMK0OB
-OwIhAI/lQhp+y6LRiGMbirdjXovLS3o0/Jg6GC22Lg3OVOt9AiEAiclWD1RxU6m3
-hmIk62mvy3Vrh0MJjZKGkHwiT/pnNNECIQC4sliICwRB1YlVG8EG47+jFbmp35Mg
-Xj+dGaf/SnaHMg==
------END PRIVATE KEY-----
-');
+        file_put_contents('/tmp/phpunit/priv.key', file_get_contents(dirname(__FILE__) . '/../setup/priv.key'));
         $modulus = $this->crypt->getPublicKeyModulus();
-        $this->assertEquals('9BF42095759886B4C1A8E28CD52AD6F85A75ED4F94E10305B9CD0C0133121CEF2E4B89C079C94D8F7B487F6C157A2A9544C3763E86F8228517F5EBBF624526BD', $modulus);
+        $this->assertEquals(file_get_contents(dirname(__FILE__) . '/../setup/pubmodulus'), $modulus);
     }
 
     /**
@@ -105,7 +95,7 @@ Xj+dGaf/SnaHMg==
     }
 
     public function tearDown() {
-        exec("rm -rf /tmp/rsakey");
+        exec("rm -rf /tmp/phpunit");
         unset($this->crypt);
     }
 }
