@@ -4,7 +4,7 @@
  *
  * @category Library
  * @package  Util
- * @author   Lancer <lancer.he@gmail.com>
+ * @author   Lancer He <lancer.he@gmail.com>
  * @since    2014-06-15
  * @version  1.0 
  */

@@ -38,8 +38,6 @@ class Decorator_LoggerFileTest extends PHPUnit_Framework_TestCase {
 
     public function tearDown() {
         parent::tearDown();
-        if ( file_exists('/tmp/wwwlogs/httprequest/phpunit.log') ) {
-            unlink('/tmp/wwwlogs/httprequest/phpunit.log');
-        }
+        exec("rm -rf /tmp/wwwlogs/*");
     }
 }

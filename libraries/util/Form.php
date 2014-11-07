@@ -4,7 +4,7 @@
  *
  * @category Library
  * @package  Util
- * @author   Lancer <lancer.he@gmail.com>
+ * @author   Lancer He <lancer.he@gmail.com>
  * @version  1.0 
  */
 class Util_Form{
