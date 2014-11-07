@@ -1,6 +1,6 @@
 <?php
 /**
- * Convert_Big2gb 简繁体转化工具
+ * 简繁体转化工具
  *
  * @category Library
  * @package  Convert

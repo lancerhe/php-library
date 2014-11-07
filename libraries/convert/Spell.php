@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper_Spell 汉字拼音首字母工具类
+ * 汉字拼音首字母工具类
  *
  * @category Library
  * @package  Convert
