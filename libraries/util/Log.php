@@ -23,7 +23,7 @@ class Util_Log {
         $path_parts = pathinfo($log_file);
         $log_folder = $path_parts["dirname"];
         if ( ! is_dir($log_folder) ) {
-            mkdir($log_folder, 0700, true);
+            mkdir($log_folder, 0755, true);
         }
 
         $handle = fopen($log_file, "a+");
