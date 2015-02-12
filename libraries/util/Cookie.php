@@ -16,30 +16,18 @@ class Util_Cookie {
     }
 
     public static function get($name) {
-        if ( self::isCli() )
-            return ( isset(self::$data[$name]) ) ? self::$data[$name] : false;
-        else
-            return ( isset($_COOKIE[$name]) ) ? $_COOKIE[$name] : false;
+        return self::isCli() ? self::$data[$name] : $_COOKIE[$name];
     }
 
     public static function set($name, $value, $expire = 0, $path = '', $domain = '', $secure = false, $httponly = false ) {
-        if ( self::isCli() )
-            self::$data[$name] = $value;
-        else
-            setcookie( $name, $value, $expire, $path, $domain, $secure, $httponly );
+        self::isCli() ? (self::$data[$name] = $value) : setcookie( $name, $value, $expire, $path, $domain, $secure, $httponly );
     }
 
     public static function has($name) {
-        if ( self::isCli() )
-            return ( isset(self::$data[$name]) ) ? true : false;
-        else
-            return ( isset($_COOKIE[$name]) ) ? true : false;
+        return self::isCli() ? array_key_exists($name, self::$data) : isset($name, $_COOKIE);
     }
 
     public static function del($name) {
-        if ( self::isCli() )
-            unset(self::$data[$name]);
-        else
-            setcookie( $name, "", time() - 1 );
+        if ( self::isCli() ) unset(self::$data[$name]); else setcookie( $name, "", time() - 1 );
     }
 }
