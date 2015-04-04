@@ -7,6 +7,9 @@
  * @author   Lancer He <lancer.he@gmail.com>
  * @version  1.0 
  */
+
+require_once dirname(__FILE__) .  '/../util/Array.php';
+
 class Redis_Sentinel {
 
     /**
@@ -47,13 +50,13 @@ class Redis_Sentinel {
                 $this->_slaves  = $Client->slaves($this->_master_name);
                 return;
             } catch (Redis_Sentinel_ConnectionTcpExecption $e) {
-                $this->_writeOutputException($Client);
+                $this->_writeOutputException($Client, $e);
             }
         }
         throw new Redis_Sentinel_ConnectionFailureExecption();
     }
 
-    protected function _writeOutputException(Redis_Sentinel_Client $Client) {
+    protected function _writeOutputException(Redis_Sentinel_Client $Client, Exception $e) {
         $output = "[". date('Y-m-d H:i:s'). "] " . $Client->getHost() . ":" . $Client->getPort() . " " . $e->getMessage() . PHP_EOL;
         file_put_contents("/tmp/redis_sentinel_exception.log", $output, FILE_APPEND);
     }
