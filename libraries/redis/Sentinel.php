@@ -73,12 +73,15 @@ class Redis_Sentinel {
 
     public function getSlaves() {
         $this->_connect();
-        return $this->_slaves;
+        $slaves = [];
+        foreach($this->_slaves as $slave) 
+            if($slave['flags'] == 'slave') $slaves[] = $slave;
+        return $slaves;
     }
 
     public function getSlave() {
-        $this->_connect();
-        $idx = rand(0, count($this->_slaves) - 1);
-        return $this->_slaves[$idx];
+        $slaves = $this->getSlaves();
+        $idx = rand(0, count($slaves) - 1);
+        return $slaves[$idx];
     }
 }

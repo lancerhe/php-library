@@ -53,8 +53,9 @@ class Redis_SentinelTest extends PHPUnit_Framework_TestCase {
         $stub_client_2->expects($this->any())
             ->method('slaves')
             ->willReturn([
-                [ 'name' => 'my_redis', 'host' => '192.168.1.6', 'port' => 26379 ], 
-                [ 'name' => 'my_redis', 'host' => '192.168.1.7', 'port' => 26379 ],
+                [ 'name' => 'my_redis', 'host' => '192.168.1.6', 'port' => 26379, 'flags' => 'shutdown, slave' ], 
+                [ 'name' => 'my_redis', 'host' => '192.168.1.7', 'port' => 26379, 'flags' => 'slave' ], 
+                [ 'name' => 'my_redis', 'host' => '192.168.1.8', 'port' => 26379, 'flags' => 'slave' ],
             ]);
 
         $sentinel = new Redis_Sentinel('my_redis');
@@ -62,8 +63,8 @@ class Redis_SentinelTest extends PHPUnit_Framework_TestCase {
         $sentinel->add($stub_client_2);
 
         $this->assertEquals('192.168.1.5', $sentinel->getMaster()['host']);
-        $this->assertEquals('192.168.1.6', $sentinel->getSlaves()[0]['host']);
-        $this->assertEquals('192.168.1.7', $sentinel->getSlaves()[1]['host']);
-        $this->assertTrue( in_array( $sentinel->getSlave()['host'], ['192.168.1.6', '192.168.1.7'] ) );
+        $this->assertEquals('192.168.1.7', $sentinel->getSlaves()[0]['host']);
+        $this->assertEquals('192.168.1.8', $sentinel->getSlaves()[1]['host']);
+        $this->assertTrue( in_array( $sentinel->getSlave()['host'], ['192.168.1.7', '192.168.1.8'] ) );
     }
 }
