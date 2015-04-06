@@ -8,8 +8,6 @@
  * @version  1.0 
  */
 
-require_once dirname(__FILE__) .  '/../util/Array.php';
-
 class Redis_Sentinel {
 
     /**
@@ -67,7 +65,10 @@ class Redis_Sentinel {
 
     public function getMaster() {
         $this->_connect();
-        $masters = Util_Array::column($this->_masters, null, "name");
+        $masters = [];
+        foreach ($this->_masters as $master) {
+            $masters[$master['name']] = $master;
+        }
         return $masters[$this->_master_name];
     }
 
