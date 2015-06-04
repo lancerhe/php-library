@@ -36,13 +36,14 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
 
     public static function providerForcutString() {
         return [
-            ['My name is lancer',  10, '...', 'utf-8', 'My name is...'],
-            ['My name is lancer',  10, '...', 'gbk',   'My name is...'],
-            ['My name is lancer',  17, '...', 'gbk',   'My name is lancer'],
-            ['我的名字是lancer',    17, '...', 'gbk',   '我的名字是la...'],
-            ['我的名字是lancer',    9, '...', 'utf-8',   '我的名字...'],
-            ['我的名字是lancer',    8, '...', 'utf-8',   '我的名字...'],
-            ['我的名字是lancer',    7, '...', 'utf-8',   '我的名...'],
+            ['My name is lancer',         10, '...', 'utf-8', 'My name is...'],
+            ['My name is lancer',         10, '...', 'gbk',   'My name is...'],
+            ['My name is lancer',         17, '...', 'gbk',   'My name is lancer'],
+            ['我的名字是lancer',           17, '...', 'gbk',   '我的名字是la...'],
+            ['我的名字是lancer',           9, '...', 'utf-8',   '我的名字...'],
+            ['我的名字是lancer',           8, '...', 'utf-8',   '我的名字...'],
+            ['我的名字是lancer',           7, '...', 'utf-8',   '我的名...'],
+            ['My Name is &amp; Lancer',   16, '...', 'utf-8',   'My Name is &amp;...'],
         ];
     }
 
