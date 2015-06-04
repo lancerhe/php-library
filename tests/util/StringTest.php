@@ -17,9 +17,11 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
 
     public static function providerForsubstring() {
         return [
-            ['abca/need/asdfas',  '/',  '',    '', 'need'],
-            ['ab!before!need===', '!', '===',  '', 'before!need'],
-            ['ab!before!need===', '!', '===',  1, 'need'],
+            ['abca//asdfas',        '/',  '',    '', ''],
+            ['abca/need/asdfas',    '/',  '',    '', 'need'],
+            ['ab!before!need===',   '!', '===',  '', 'before!need'],
+            ['ab!before!need===',   '!', '===',  1, 'need'],
+            ['ab!before!我的家===', '!', '===',   1, '我的家'],
         ];
     }
 
