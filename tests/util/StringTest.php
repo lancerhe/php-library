@@ -25,6 +25,15 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
         ];
     }
 
+    public static function providerForcutBefore() {
+        return [
+            ['ab!before!need===',  '===',  4, 'need'],
+            ['abca/need/asdfas',    '/',   4, 'abca'],
+            ['ab!before!need===',   'ab',  4, ''],
+            ['ab!before!need===',   'ab',  0, ''],
+        ];
+    }
+
     /**
      * @test
      * @dataProvider providerForbdstrpos
@@ -40,6 +49,15 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
      */
     public function substring($string, $begin, $end, $near_end, $expected) {
         $string = Util_String::substring($string, $begin, $end, $near_end);
+        $this->assertEquals($expected, $string);
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForcutBefore
+     */
+    public function cutBefore($string, $needle, $length, $expected) {
+        $string = Util_String::cutBefore($string, $needle, $length);
         $this->assertEquals($expected, $string);
     }
 }
