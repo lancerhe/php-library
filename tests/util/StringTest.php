@@ -15,6 +15,14 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
         ];
     }
 
+    public static function providerForsubstring() {
+        return [
+            ['abca/need/asdfas',  '/',  '',    '', 'need'],
+            ['ab!before!need===', '!', '===',  '', 'before!need'],
+            ['ab!before!need===', '!', '===',  1, 'need'],
+        ];
+    }
+
     /**
      * @test
      * @dataProvider providerForbdstrpos
@@ -22,5 +30,14 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
     public function bdstrpos($string, $substr, $time, $expected_pos) {
         $pos = Util_String::bdstrpos($string, $substr, $time);
         $this->assertEquals($expected_pos, $pos);
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForsubstring
+     */
+    public function substring($string, $begin, $end, $near_end, $expected) {
+        $string = Util_String::substring($string, $begin, $end, $near_end);
+        $this->assertEquals($expected, $string);
     }
 }

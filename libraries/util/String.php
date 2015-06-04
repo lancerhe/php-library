@@ -28,4 +28,31 @@ class Util_String {
         }
         return $return;
     }
+
+    /*
+     *
+     * @brief 截取两个子字符串之间的字符串
+     *
+     * @example:
+     * Util_String::substring('abca/need/asdfas', '/');  
+     * 返回 'need', 两个'/'之间的字符串
+     *
+     * Util_String::substring('ab!before!need===', '!', '===')
+     * 返回 'before!need'之间的字符串
+     *
+     * Util_String::substring('ab!before!need===', '!', '===', 1)
+     * 返回 'need',  === 之前最近一个!号间的字
+     */
+    public static function substring($string, $begin, $end = '', $near_end = 0){
+        if($near_end){
+            $before = substr($string, 0, strpos($string, $end));
+            $beginPos = strrpos($before, $begin) + strlen($begin);
+            return substr($before, $beginPos);
+        } else {
+            $start = strpos($string, $begin);
+            $after = substr($string, $start + strlen($begin));
+            $stop = $end ? strpos($after, $end) : strpos($after, $begin);
+            return substr($after, 0, $stop);
+        }
+    }
 }
