@@ -34,6 +34,18 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
         ];
     }
 
+    public static function providerForcutString() {
+        return [
+            ['My name is lancer',  10, '...', 'utf-8', 'My name is...'],
+            ['My name is lancer',  10, '...', 'gbk',   'My name is...'],
+            ['My name is lancer',  17, '...', 'gbk',   'My name is lancer'],
+            ['我的名字是lancer',    17, '...', 'gbk',   '我的名字是la...'],
+            ['我的名字是lancer',    9, '...', 'utf-8',   '我的名字...'],
+            ['我的名字是lancer',    8, '...', 'utf-8',   '我的名字...'],
+            ['我的名字是lancer',    7, '...', 'utf-8',   '我的名...'],
+        ];
+    }
+
     /**
      * @test
      * @dataProvider providerForbdstrpos
@@ -58,6 +70,15 @@ class Util_StringTest extends PHPUnit_Framework_TestCase {
      */
     public function cutBefore($string, $needle, $length, $expected) {
         $string = Util_String::cutBefore($string, $needle, $length);
+        $this->assertEquals($expected, $string);
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForcutString
+     */
+    public function cutString($string, $length, $dot, $charset, $expected) {
+        $string = Util_String::cutString($string, $length, $dot, $charset);
         $this->assertEquals($expected, $string);
     }
 }
