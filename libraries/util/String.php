@@ -62,13 +62,11 @@ class Util_String {
      * @examle echo Util_String::cutBefore('ab!before!need===', '===', 4); //返回 need
      */
     public static function cutBefore($string, $needle, $length){
-        if($length === 0) {
+        if ( $length === 0 ) 
             return false;
-        }
         $pos = strpos($string, $needle);
-        if($pos === 0){
+        if ( $pos === 0 )
             return '';
-        }
         $before = substr($string, 0, $pos);
         return substr($before, -$length);
     }
@@ -83,9 +81,8 @@ class Util_String {
      *
      */
     public static function cutString($string, $length, $dot = ' ...', $charset = 'gbk') {
-        if(strlen($string) <= $length) {
+        if(strlen($string) <= $length)
             return $string;
-        }
 
         $pre = '{%';
         $end = '%}';
@@ -114,22 +111,18 @@ class Util_String {
                     $n++;
                 }
 
-                if($noc >= $length) {
+                if($noc >= $length) 
                     break;
-                }
-
             }
-            if($noc > $length) {
+            if($noc > $length) 
                 $n -= $tn;
-            }
 
             $strcut = substr($string, 0, $n);
 
-        } else {
-            for($i = 0; $i < $length; $i++) {
+        } else 
+            for($i = 0; $i < $length; $i++)
                 $strcut .= ord($string[$i]) > 127 ? $string[$i].$string[++$i] : $string[$i];
-            }
-        }
+
         $strcut = str_replace(array($pre.'&'.$end, $pre.'"'.$end, $pre.'<'.$end, $pre.'>'.$end), array('&amp;', '&quot;', '&lt;', '&gt;'), $strcut);
         return $strcut.$dot;
     }
