@@ -31,7 +31,7 @@ class Http_Request_Decorator_LoggerFile extends Http_Request_Decorator {
         $output = 
             '>>>>>>>>>>>>' . PHP_EOL
             . '[time] => ' . date('Y-m-d H:i:s') . PHP_EOL
-            . '[request_header]        => ' . rtrim($request['request_header'], "\r\n") . PHP_EOL
+            . '[request_header]        => ' . (isset($request['request_header']) ? rtrim($request['request_header'], "\r\n") : '') . PHP_EOL
             . '[request_variable_body] => ' . (is_array($post) ? http_build_query($post) : $post) . PHP_EOL
             . '[request_original_body] => ' . $this->getRequest()->post . PHP_EOL
             . '[response_http_code]    => ' . $request['http_code'] . PHP_EOL
