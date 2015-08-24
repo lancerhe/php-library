@@ -1,0 +1,17 @@
+{
+    "name": "lancerhe/php-library",
+    "description": "php library.",
+    "authors": [
+        {
+            "name": "Lancer He",
+            "email": "lancer.he@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "Library": "src"
+        }
+    }
+}
