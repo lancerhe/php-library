@@ -8,7 +8,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "php": ">=5.4.0"
+    },
     "autoload": {
         "psr-0": {
             "Library": "src"
