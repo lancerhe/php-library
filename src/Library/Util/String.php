@@ -2,8 +2,8 @@
 /**
  * String
  *
- * @category Util
- * @package  String
+ * @category Library
+ * @package  Util
  * @author   Lancer <lancer.he@gmail.com>
  * @version  1.0 
  */

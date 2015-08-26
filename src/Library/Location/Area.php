@@ -3,7 +3,7 @@
  * 标准国家区位代码
  *
  * @category Library
- * @package  Convert
+ * @package  Location
  * @author   Lancer He <lancer.he@gmail.com>
  * @version  1.0 
  * @since    2014-11-07

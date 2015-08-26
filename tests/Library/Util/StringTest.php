@@ -1,6 +1,6 @@
 <?php
 /**
- * Util_Log Library Test
+ * String Library Test
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-06-04
  */

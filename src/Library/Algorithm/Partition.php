@@ -1,12 +1,12 @@
 <?php
 /**
-* 数据分表算法 
-*
-* @category Library
-* @package  Algorithm
-* @author   Lancer He <lancer.he@gmail.com>
-* @version  1.0 
-*/
+ * 数据分表算法 
+ *
+ * @category Library
+ * @package  Algorithm
+ * @author   Lancer He <lancer.he@gmail.com>
+ * @version  1.0 
+ */
 
 namespace Library\Algorithm;
 

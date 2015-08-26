@@ -4,6 +4,7 @@
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-11-07
  */
+
 namespace Library\Tests\Location;
 
 use Library\Location\Area;

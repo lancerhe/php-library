@@ -1,6 +1,6 @@
 <?php
 /**
- * Util_Array Library Test
+ * ShutdownEvent Library Test
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2014-10-27
  */

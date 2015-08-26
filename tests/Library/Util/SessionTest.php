@@ -1,6 +1,6 @@
 <?php
 /**
- * Util_Cookie Library Test
+ * Session Library Test
  * @author Lancer He <lancer.he@gmail.com>
  * @since  2015-02-12
  */
