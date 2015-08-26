@@ -27,7 +27,7 @@ class Cookie {
     }
 
     public static function has($name) {
-        return self::isCli() ? array_key_exists($name, self::$data) : isset($name, $_COOKIE);
+        return self::isCli() ? array_key_exists($name, self::$data) : isset($_COOKIE[$name]);
     }
 
     public static function del($name) {
