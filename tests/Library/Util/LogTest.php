@@ -13,8 +13,8 @@ class LogTest extends \PHPUnit_Framework_TestCase {
 
     public static function provideWrite() {
         return array(
-            array('/tmp/wwwlogs', 'php.log', 'TestPHP', '/tmp/wwwlogs/php.log', 'TestPHP'.PHP_EOL),
-            array('/tmp/wwwlogs', 'tmp/php.log', 'TestPHP', '/tmp/wwwlogs/tmp/php.log', 'TestPHP'.PHP_EOL),
+            array('/tmp', 'phpunit.log',     'TestPHP', '/tmp/phpunit.log',     'TestPHP'.PHP_EOL),
+            array('/tmp', 'tmp/phpunit.log', 'TestPHP', '/tmp/tmp/phpunit.log', 'TestPHP'.PHP_EOL),
         );
     }
 
@@ -31,6 +31,12 @@ class LogTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function tearDown() {
-        exec("rm -rf /tmp/wwwlogs/*");
+        if (file_exists("/tmp/phpunit.log")) {
+            unlink("/tmp/phpunit.log");
+        }
+        if (file_exists("/tmp/tmp/phpunit.log")) {
+            unlink("/tmp/tmp/phpunit.log");
+            rmdir("/tmp/tmp");
+        }
     }
 }

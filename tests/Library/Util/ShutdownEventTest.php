@@ -12,15 +12,11 @@ use Library\Util\ShutdownEvent;
 class ShutdownEventCalledInTest {
 
     public static function trace($message) {
-        file_put_contents('/tmp/shutdownwrite', $message);
+        file_put_contents('/tmp/phpunit', $message);
     }
 }
 
 class ShutdownEventTest extends \PHPUnit_Framework_TestCase {
-
-    public function setUp() {
-        exec("rm -f /tmp/shutdownwrite");
-    }
 
     /**
      * @test
@@ -57,6 +53,7 @@ class ShutdownEventTest extends \PHPUnit_Framework_TestCase {
     public function call() {
         $ShutdownEvent = new ShutdownEvent();
         $ShutdownEvent->call();
-        $this->assertEquals('response trace testing on shutdown.', file_get_contents('/tmp/shutdownwrite') );
+        $this->assertEquals('response trace testing on shutdown.', file_get_contents('/tmp/phpunit') );
+        unlink('/tmp/phpunit');
     }
 }
