@@ -142,7 +142,7 @@ class Session_Cli implements Session_Interface  {
     }
 
     public function destroy() {
-        $this->_session = [];
+        $this->_session = array();
     }
 }
 

@@ -13,7 +13,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase {
 
     public function setUp() {
         parent::setUp();
-        Cookie::$data = [];
+        Cookie::$data = array();
     }
 
     /**

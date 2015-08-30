@@ -12,7 +12,7 @@ namespace Library\Util;
 
 class Cookie {
 
-    public static $data = [];
+    public static $data = array();
 
     public static function isCli() {
         return ( php_sapi_name() == 'cli' );
