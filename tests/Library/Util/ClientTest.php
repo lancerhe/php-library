@@ -37,6 +37,21 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      */
+    public function getIp_EVN_HTTP_X_FORWARDED_FOR_SIGNLE() {
+        putenv("HTTP_X_FORWARDED_FOR=192.168.236.61, 192.168.1.23");
+        $this->assertEquals('192.168.236.61', Client::getIp());
+    }
+    /**
+     * @test
+     */
+    public function getIp_EVN_HTTP_X_FORWARDED_FOR_MUTIL() {
+        putenv("HTTP_X_FORWARDED_FOR=192.168.236.61, 192.168.1.23");
+        $this->assertEquals('192.168.236.61, 192.168.1.23', Client::getIp(false));
+    }
+
+    /**
+     * @test
+     */
     public function getIp_EVN_REMOTE_ADDR() {
         putenv("REMOTE_ADDR=192.168.236.61");
         $this->assertEquals('192.168.236.61', Client::getIp());
