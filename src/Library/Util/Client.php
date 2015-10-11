@@ -38,9 +38,11 @@ class Client {
     public static function getForwardedFirstPublicId() {
         $forwarded_ips = explode(",", getenv('HTTP_X_FORWARDED_FOR') );
         foreach ($forwarded_ips as $ip) {
+            $ip = trim($ip);
             if ( Validate::isPrivateIpAddr($ip) ) continue;
             return $ip;
         }
+        return 'unknown';
     }
 
 

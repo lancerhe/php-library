@@ -30,17 +30,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
     public function getIp_EVN_HTTP_X_FORWARDED_FOR() {
-        putenv("HTTP_X_FORWARDED_FOR=192.168.236.61");
-        $this->assertEquals('192.168.236.61', Client::getIp());
+        putenv("HTTP_X_FORWARDED_FOR=56.167.1.23");
+        $this->assertEquals('56.167.1.23', Client::getIp());
     }
 
     /**
      * @test
      */
     public function getIp_EVN_HTTP_X_FORWARDED_FOR_SIGNLE() {
-        putenv("HTTP_X_FORWARDED_FOR=192.168.236.61, 192.168.1.23");
-        $this->assertEquals('192.168.236.61', Client::getIp());
+        putenv("HTTP_X_FORWARDED_FOR=192.168.236.61, 56.167.1.23");
+        $this->assertEquals('56.167.1.23', Client::getIp());
     }
+
+    /**
+     * @test
+     */
+    public function getIp_EVN_HTTP_X_FORWARDED_FOR_SIGNLE_NOT_FOUND() {
+        putenv("HTTP_X_FORWARDED_FOR=192.168.236.61, 10.12.23.33");
+        $this->assertEquals('unknown', Client::getIp());
+    }
+
     /**
      * @test
      */
