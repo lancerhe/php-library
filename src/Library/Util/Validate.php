@@ -239,9 +239,22 @@ class Validate{
      * @return boolean
      * @example Validate::isIpAddr( '' );
      */
-    public static function isIpAddr($IP) {
-        $result = ip2long($IP);
+    public static function isIpAddr($ip) {
+        $result = ip2long($ip);
         return ($result == -1 || $result == false) ? false : true;
+    }
+
+    /**
+     * isPrivateIpAddr 是否为内网IP地址
+     *
+     * @access public
+     * @static
+     * @param string $string
+     * @return boolean
+     * @example Validate::isIpAddr( '' );
+     */
+    public static function isPrivateIpAddr($ip) {
+        return !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
     }
 
 

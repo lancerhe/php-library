@@ -246,6 +246,27 @@ class ValidateTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, Validate::isIpAddr($string));
     }
 
+    public static function providerPrivateIpAddr() {
+        return array(
+            array(true, '10.1.0.1'),
+            array(true, '172.16.2.4'),
+            array(true, '172.31.1.5'),
+            array(true, '192.168.1.5'),
+            array(false, '11.1.0.1'),
+            array(false, '172.15.2.4'),
+            array(false, '172.32.1.5'),
+            array(false, '192.167.1.5'),
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providerPrivateIpAddr
+     */
+    public function validatePrivateIpAddr($expected, $string) {
+        $this->assertEquals($expected, Validate::isPrivateIpAddr($string));
+    }
+
     public static function providerIdCard() {
         return array(
             array(false,'3501128702121222322'),

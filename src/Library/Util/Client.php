@@ -32,6 +32,18 @@ class Client {
         return 'unknown';
     }
 
+    /**
+     * @desc   获取转发IP中的公网IP
+     * @return string
+     */
+    public function getForwardedPublicId() {
+        $forwarded_ips = explode(",", getenv('HTTP_X_FORWARDED_FOR') );
+        // foreach ($forwarded_ips as $ip) {
+        //     $first_zone = explode(".", $ip)[0];
+        //     if ( in_array( $first_zone, ['127', ''] )
+        // }
+    }
+
 
     /**
      * @return string
