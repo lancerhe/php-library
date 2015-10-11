@@ -22,8 +22,7 @@ class Client {
             return getenv('HTTP_CLIENT_IP');
         } elseif(getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
             if ( ! $single ) return getenv('HTTP_X_FORWARDED_FOR');
-            $forwarded_ips = explode(",", getenv('HTTP_X_FORWARDED_FOR') );
-            return $forwarded_ips[0];
+            return self::getForwardedFirstPublicId();
         } elseif(getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
             return getenv('REMOTE_ADDR');
         } elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
@@ -33,15 +32,15 @@ class Client {
     }
 
     /**
-     * @desc   获取转发IP中的公网IP
+     * @desc   获取转发IP中的第一个公网IP
      * @return string
      */
-    public function getForwardedPublicId() {
+    public static function getForwardedFirstPublicId() {
         $forwarded_ips = explode(",", getenv('HTTP_X_FORWARDED_FOR') );
-        // foreach ($forwarded_ips as $ip) {
-        //     $first_zone = explode(".", $ip)[0];
-        //     if ( in_array( $first_zone, ['127', ''] )
-        // }
+        foreach ($forwarded_ips as $ip) {
+            if ( Validate::isPrivateIpAddr($ip) ) continue;
+            return $ip;
+        }
     }
 
 
