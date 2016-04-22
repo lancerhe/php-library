@@ -18,7 +18,11 @@
     },
     "autoload" : {
         "psr-4" : {
-            "Library\\" : "src/",
+            "Library\\" : "src/"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
             "Library\\Test\\" : "tests/"
         }
     }
