@@ -8,7 +8,7 @@ Http request and parse decorator (Easy to expand).
 Requirements
 ------------
 
-**PHP5.3.0 or later**
+**PHP5.4.0 or later**
 
 Installation
 ------------
@@ -18,7 +18,7 @@ Create or modify your composer.json
 ``` json
 {
     "require": {
-        "lancerhe/php-library": "dev-master"
+        "lancerhe/php-library": "1.1.0"
     }
 }
 ```
@@ -35,34 +35,34 @@ Introduction
 Util Class:
 
 ```
-\Library\Util\Client
-\Library\Util\Cookie
-\Library\Util\Form
-\Library\Util\IArray
-\Library\Util\Log
-\Library\Util\Page
-\Library\Util\Session
-\Library\Util\ShutdownEvent
-\Library\Util\String
-\Library\Util\Timer
-\Library\Util\Validate
+\LancerHe\Library\Util\Client
+\LancerHe\Library\Util\Cookie
+\LancerHe\Library\Util\Form
+\LancerHe\Library\Util\IArray
+\LancerHe\Library\Util\Log
+\LancerHe\Library\Util\Page
+\LancerHe\Library\Util\Session
+\LancerHe\Library\Util\ShutdownEvent
+\LancerHe\Library\Util\String
+\LancerHe\Library\Util\Timer
+\LancerHe\Library\Util\Validate
 ```
 
 Location Class:
 ```
-\Library\Location\Area
+\LancerHe\Library\Location\Area
 ```
 
 Convert Class:
 ```
-\Library\Convert\Spell
-\Library\Convert\Big2gb
+\LancerHe\Library\Convert\Spell
+\LancerHe\Library\Convert\Big2gb
 ```
 
 Algorithm Class:
 ```
-\Library\Algorithm\Unique
-\Library\Algorithm\Partition
+\LancerHe\Library\Algorithm\Unique
+\LancerHe\Library\Algorithm\Partition
 ```
 
 Crypt Class see: <https://github.com/lancerhe/php-crypt>
