@@ -1,16 +1,15 @@
 <?php
+namespace LancerHe\Library\Tests\Convert;
+
+use LancerHe\Library\Convert\Big2gb;
+
 /**
- * Convert_Big2gb Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-11-06
+ * Class Big2gbTest
+ *
+ * @package LancerHe\Library\Tests\Convert
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Tests\Convert;
-
-use Library\Convert\Big2gb;
-
 class Big2gbTest extends \PHPUnit_Framework_TestCase {
-
     /**
      * @test
      */

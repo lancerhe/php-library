@@ -1,36 +1,31 @@
 <?php
+namespace LancerHe\Library\Util;
+
 /**
- * Form
+ * Class Form
  *
- * @category Library
- * @package  Util
- * @author   Lancer He <lancer.he@gmail.com>
- * @version  1.0 
+ * @package LancerHe\Library\Util
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Util;
-
-class Form{
-
+class Form {
     /**
      * @access public
      * @static
-     * @param array   $array          数据源.
-     * @param string  $selected_key   被选中key.
-     * @param string  $default_label  增加默认选项标示.
-     * @param boolean $label2value    是否将数据源中标签项做为值.
-     * @param 
+     * @param array   $array         数据源.
+     * @param string  $selected_key  被选中key.
+     * @param string  $default_label 增加默认选项标示.
+     * @param boolean $label2value   是否将数据源中标签项做为值.
+     * @param
      * @return string.
      */
-    public static function options($array, $selected_key=null, $default_label=null, $label2value=false) {
+    public static function options($array, $selected_key = null, $default_label = null, $label2value = false) {
         $html = '';
-        if ( $default_label ) 
+        if ( $default_label )
             $html .= '<option value="">' . $default_label . '</option>';
-        
-        foreach ($array AS $key => $val) {
+        foreach ( $array AS $key => $val ) {
             $key      = $label2value ? $val : $key;
             $selected = ($selected_key === $key) ? " selected" : '';
-            $html    .= "<option value=\"{$key}\"{$selected}>{$val}</option>";
+            $html .= "<option value=\"{$key}\"{$selected}>{$val}</option>";
         }
         return $html;
     }
@@ -45,12 +40,11 @@ class Form{
      * @param mixed $callback       select回调函数.
      * @return string.
      */
-    public static function select($name, $array, $selected_key=null, $default_option=null, $callback=null) {
+    public static function select($name, $array, $selected_key = null, $default_option = null, $callback = null) {
         $callback_html = '';
-        if( ! is_null($callback) )
+        if ( ! is_null($callback) )
             $callback_html .= ' onchange="return ' . $callback . ';"';
-    
-        $html  = '<select id="' . $name . '" name="' . $name . '" ' . $callback_html . '>';
+        $html = '<select id="' . $name . '" name="' . $name . '" ' . $callback_html . '>';
         $html .= self::options($array, $selected_key, $default_option);
         $html .= '</select>';
         return $html;
@@ -65,14 +59,14 @@ class Form{
      * @param string $class       默认Label Class
      * @return string.
      */
-    public static function radio($name, $array, $checked_key=null, $class="radio") {
+    public static function radio($name, $array, $checked_key = null, $class = "radio") {
         $html = '';
-        foreach ($array as $key => $val) {
+        foreach ( $array as $key => $val ) {
             $checked = ($checked_key === $key) ? ' checked' : '';
             $html .= "
                 <label class=\"{$class}\">
                     <input type=\"radio\" name=\"{$name}\" value=\"{$key}\"{$checked}>{$val}
-                </label>"; 
+                </label>";
         }
         return $html;
     }
@@ -86,14 +80,14 @@ class Form{
      * @param string $class       默认Label Class
      * @return string.
      */
-    public static function checkbox($name, $array, $checked_key=array(), $class="checkbox") {
+    public static function checkbox($name, $array, $checked_key = [], $class = "checkbox") {
         $html = '';
-        foreach ($array as $key => $val) {
-            $checked = in_array($key, $checked_key ) ? ' checked' : '';
+        foreach ( $array as $key => $val ) {
+            $checked = in_array($key, $checked_key) ? ' checked' : '';
             $html .= "
                 <label class=\"{$class}\">
                     <input type=\"checkbox\" name=\"{$name}\" value=\"{$key}\"{$checked}>{$val}
-                </label>"; 
+                </label>";
         }
         return $html;
     }

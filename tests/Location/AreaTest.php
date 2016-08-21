@@ -1,16 +1,23 @@
 <?php
+namespace LancerHe\Library\Tests\Location;
+
+use LancerHe\Library\Location\Area;
+
 /**
- * Area Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-11-07
+ * Class AreaTest
+ *
+ * @package LancerHe\Library\Tests\Location
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Tests\Location;
-
-use Library\Location\Area;
-
 class AreaTest extends \PHPUnit_Framework_TestCase {
+    /**
+     * @var Area
+     */
+    public $Area;
 
+    /**
+     *
+     */
     public function setUp() {
         $this->Area = new Area();
     }
@@ -49,5 +56,4 @@ class AreaTest extends \PHPUnit_Framework_TestCase {
     public function getPathWithSpecialCity() {
         $this->assertEquals('北京市 东城区', $this->Area->getPath(110101));
     }
-
 }

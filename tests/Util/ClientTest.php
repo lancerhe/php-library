@@ -1,16 +1,15 @@
 <?php
+namespace LancerHe\Library\Tests\Util;
+
+use LancerHe\Library\Util\Client;
+
 /**
- * Client Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-10-27
+ * Class ClientTest
+ *
+ * @package LancerHe\Library\Tests\Util
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Tests\Util;
-
-use Library\Util\Client;
-
 class ClientTest extends \PHPUnit_Framework_TestCase {
-
     /**
      * @test
      */
@@ -74,18 +73,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('192.168.236.61', Client::getIp());
     }
 
-    public static function providerBrowser(){
-        return array(
-            array('MSIE 7.0',    'Internet Explorer'),
-            array('Firefox 7.0', 'Mozilla Firefox'),
-            array('Safari 7.0',  'Apple Safari'),
-            array('Chrome 7.0',  'Google Chrome'),
-            array('Flock 7.0',   'Flock'),
-            array('Opera 7.0',   'Opera'),
-            array('Netscape 7.0', 'Netscape'),
-            array('MyBrowser 7.0', 'unknown'),
-            array(null,            'unknown'),
-        );
+    public static function providerBrowser() {
+        return [
+            ['MSIE 7.0', 'Internet Explorer'],
+            ['Firefox 7.0', 'Mozilla Firefox'],
+            ['Safari 7.0', 'Apple Safari'],
+            ['Chrome 7.0', 'Google Chrome'],
+            ['Flock 7.0', 'Flock'],
+            ['Opera 7.0', 'Opera'],
+            ['Netscape 7.0', 'Netscape'],
+            ['MyBrowser 7.0', 'unknown'],
+            [null, 'unknown'],
+        ];
     }
 
     /**

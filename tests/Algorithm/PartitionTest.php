@@ -1,16 +1,15 @@
 <?php
+namespace LancerHe\Library\Tests\Algorithm;
+
+use LancerHe\Library\Algorithm\Partition;
+
 /**
- * Algorithm_Partition Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-11-06
+ * Class PartitionTest
+ *
+ * @package LancerHe\Library\Tests\Algorithm
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Tests\Algorithm;
-
-use Library\Algorithm\Partition;
-
 class PartitionTest extends \PHPUnit_Framework_TestCase {
-
     /**
      * @test
      */
@@ -38,7 +37,7 @@ class PartitionTest extends \PHPUnit_Framework_TestCase {
      */
     public function error_figure() {
         return [
-            ["1001"], ["0"], ["-2"]
+            ["1001"], ["0"], ["-2"],
         ];
     }
 
@@ -56,9 +55,9 @@ class PartitionTest extends \PHPUnit_Framework_TestCase {
      */
     public function assert_figure() {
         return [
-            ["0",   "234",    "1000"],
-            ["0",   "999",    "1000"],
-            ["1",   "1000",   "1000"],
+            ["0", "234", "1000"],
+            ["0", "999", "1000"],
+            ["1", "1000", "1000"],
             ["101", "101000", "1000"],
         ];
     }

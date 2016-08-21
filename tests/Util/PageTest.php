@@ -1,16 +1,18 @@
 <?php
+namespace LancerHe\Library\Tests\Util;
+
+use LancerHe\Library\Util\Page;
+
 /**
- * Page Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-11-04
+ * Class PageTest
+ *
+ * @package LancerHe\Library\Tests\Util
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Tests\Util;
-
-use Library\Util\Page;
-
 class PageTest extends \PHPUnit_Framework_TestCase {
-
+    /**
+     *
+     */
     public function setUp() {
         $_SERVER["REQUEST_URI"] = 'http://127.0.0.1/list?action=1&tid=2';
     }
@@ -18,8 +20,8 @@ class PageTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function FirstPageOutput() {
-        $page   = new Page();
+    public function fisrt_page_output() {
+        $page = new Page();
         $page->setCurrentPage(1);
         $page->setTotalNum(200);
         $page->setPageSize(10);
@@ -34,8 +36,8 @@ class PageTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function LastPageOutput() {
-        $page   = new Page();
+    public function last_page_output() {
+        $page = new Page();
         $page->setCurrentPage(20);
         $page->setTotalNum(200);
         $page->setPageSize(10);
@@ -47,12 +49,11 @@ class PageTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotContains('<li class="disabled"><a href="javascript:;">&lt;</a></li>', $output);
     }
 
-
     /**
      * @test
      */
-    public function CenterPageOutput() {
-        $page   = new Page();
+    public function center_page_output() {
+        $page = new Page();
         $page->setCurrentPage(10);
         $page->setTotalNum(200);
         $page->setPageSize(10);
@@ -67,8 +68,8 @@ class PageTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function PageOutputWithCustomUrl() {
-        $page   = new Page();
+    public function page_output_with_custom_url() {
+        $page = new Page();
         $page->setCurrentPage(10);
         $page->setTotalNum(200);
         $page->setPageSize(10);
@@ -81,13 +82,12 @@ class PageTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotContains('<li><a href="http://127.0.0.1/list/20">&lt;</a></li>', $output);
     }
 
-
     /**
      * @test
      */
-    public function PageOutputWithUrlNoParamter() {
+    public function page_output_with_url_no_parameter() {
         $_SERVER["REQUEST_URI"] = 'http://127.0.0.1/list';
-        $page   = new Page();
+        $page                   = new Page();
         $page->setCurrentPage(10);
         $page->setTotalNum(200);
         $page->setPageSize(10);
@@ -99,13 +99,12 @@ class PageTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotContains('<li><a href="http://127.0.0.1/list/?page=20">&lt;</a></li>', $output);
     }
 
-
     /**
      * @test
      */
-    public function PageOutputWithUrlPageParamter() {
+    public function page_output_with_url_page_parameter() {
         $_SERVER["REQUEST_URI"] = 'http://127.0.0.1/list?page=10';
-        $page   = new Page();
+        $page                   = new Page();
         $page->setCurrentPage(10);
         $page->setTotalNum(200);
         $page->setPageSize(10);

@@ -1,16 +1,12 @@
 <?php
+use LancerHe\Library\Algorithm\Unique;
+
 /**
- * Algorithm_Unique Library Test
+ * Class UniqueTest
+ *
  * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-11-06
  */
-
-namespace Library\Tests\Algorithm;
-
-use Library\Algorithm\Unique;
-
 class UniqueTest extends \PHPUnit_Framework_TestCase {
-
     /**
      * @test
      */

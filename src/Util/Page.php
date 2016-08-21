@@ -1,155 +1,195 @@
 <?php
+namespace LancerHe\Library\Util;
+
 /**
- * Page
+ * Class Page
  *
- * @category Library
- * @package  Util
- * @author   Lancer He <lancer.he@gmail.com>
- * @version  1.0 
+ * @package LancerHe\Library\Util
+ * @author  Lancer He <lancer.he@gmail.com>
  */
+/**
+ * Class Page
+ *
+ * @package LancerHe\Library\Util
+ * @author  Lancer He <lancer.he@gmail.com>
+ */
+class Page {
+    /**
+     * @var int
+     */
+    protected $_currentPage; //当前页
+    /**
+     * @var string
+     */
+    protected $_currentUrl; //当前URL
+    /**
+     * @var int
+     */
+    protected $_totalNum; //总记录数
+    /**
+     * @var int
+     */
+    protected $_pageSize = 10; //每页显示数目
+    /**
+     * @var int
+     */
+    protected $_pageLen = 5; //页面显示数目(长度)
+    /**
+     * @var string
+     */
+    protected $_pageClass = 'pagination'; //所用分页样式类名
+    /**
+     * @var string
+     */
+    protected $_pageHtml; //分页HTML字符串
+    /**
+     * @var int
+     */
+    protected $_totalPage; //总页数
+    /**
+     * @var int
+     */
+    protected $_pageOffset = 3; //页数偏移量
+    /**
+     * @var string
+     */
+    public $nextPageLabel = '&gt;';
+    /**
+     * @var string
+     */
+    public $lastPageLabel = '&gt;&gt;';
+    /**
+     * @var string
+     */
+    public $prevPageLabel = '&lt;';
+    /**
+     * @var string
+     */
+    public $firstPageLabel = '&lt;&lt;';
 
-namespace Library\Util;
-
-class Page{
-
-    private $_current_page; //当前页
-
-    private $_current_url; //当前URL
-
-    private $_total_num; //总记录数
-
-    private $_pagesize = 10; //每页显示数目
-
-    private $_pagelen = 5; //页面显示数目(长度)
-
-    private $_pageclass = 'pagination'; //所用分页样式类名
-
-    private $_pagestring; //分页HTML字符串
-
-    private $_total_pages; //总页数
-
-    private $_pageoffset = 3; //页数偏移量
-
-    public $next_page  = '&gt;';
-
-    public $last_page  = '&gt;&gt;';
-
-    public $prev_page  = '&lt;';
-
-    public $first_page = '&lt;&lt;';
-    
+    /**
+     * @param $page
+     */
     public function setCurrentPage($page) {
-        $this->_current_page = intval($page);
+        $this->_currentPage = intval($page);
     }
 
+    /**
+     * @param $num
+     */
     public function setTotalNum($num) {
-        $this->_total_num = intval($num);
+        $this->_totalNum = intval($num);
     }
 
-    public function setPageSize($pagesize) {
-        $this->_pagesize = intval($pagesize);
+    /**
+     * @param $pageSize
+     */
+    public function setPageSize($pageSize) {
+        $this->_pageSize = intval($pageSize);
     }
 
-    public function setCurrentUrl($current_url='') {
-        if ( ! $current_url) {
-            $current_url = $_SERVER["REQUEST_URI"];
-            $parse_url   = parse_url($current_url);
-
-            if ( isset($parse_url["query"]) ) {
-                $urlquery  = preg_replace("/(^|&)page={$this->_current_page}/", "", $parse_url["query"]);
-                $urlquery  = preg_replace("/(^|&)page=/", "", $urlquery);
-                $current_url = str_replace($parse_url["query"], $urlquery, $current_url);   
-
-                if($urlquery) $current_url.="&page=";
-                else $current_url.="page=";
+    /**
+     * @param string $currentUrl
+     */
+    public function setCurrentUrl($currentUrl = '') {
+        if ( ! $currentUrl ) {
+            $currentUrl = $_SERVER["REQUEST_URI"];
+            $parseUrl   = parse_url($currentUrl);
+            if ( isset($parseUrl["query"]) ) {
+                $urlQuery   = preg_replace("/(^|&)page={$this->_currentPage}/", "", $parseUrl["query"]);
+                $urlQuery   = preg_replace("/(^|&)page=/", "", $urlQuery);
+                $currentUrl = str_replace($parseUrl["query"], $urlQuery, $currentUrl);
+                if ( $urlQuery ) $currentUrl .= "&page=";
+                else $currentUrl .= "page=";
             } else {
-                $current_url.="?page=";
+                $currentUrl .= "?page=";
             }
-            $this->_current_url = $current_url;
+            $this->_currentUrl = $currentUrl;
         } else {
-            $this->_current_url = rtrim($current_url, '/') . '/';
+            $this->_currentUrl = rtrim($currentUrl, '/') . '/';
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function output() {
-        if ( ! $this->_current_url ) {
+        if ( ! $this->_currentUrl ) {
             $this->setCurrentUrl();
         }
-        
         $this->_caculateParam();
         $this->_buildOutput();
-        return $this->_pagestring;
+        return $this->_pageHtml;
     }
 
-
+    /**
+     * @return array
+     */
     private function _caculateParam() {
-        if (!$this->_total_num) return array();
-
-        $this->_total_pages = ceil($this->_total_num / $this->_pagesize);
-
-        $this->_current_page < 1 && $this->_current_page = 1;
-        $this->_current_page > $this->_total_pages && $this->_current_page = $this->_total_pages;
-
-        //Make sure _pagelen is odd number.
-        $this->_pagelen = $this->_pagelen % 2 ? $this->_pagelen : $this->_pagelen + 1;
-        $this->_pageoffset = ($this->_pagelen - 1) / 2;
+        if ( ! $this->_totalNum ) return [];
+        $this->_totalPage = ceil($this->_totalNum / $this->_pageSize);
+        $this->_currentPage < 1 && $this->_currentPage = 1;
+        $this->_currentPage > $this->_totalPage && $this->_currentPage = $this->_totalPage;
+        //Make sure pageLen is odd number.
+        $this->_pageLen    = $this->_pageLen % 2 ? $this->_pageLen : $this->_pageLen + 1;
+        $this->_pageOffset = ($this->_pageLen - 1) / 2;
     }
 
-
+    /**
+     *
+     */
     private function _buildOutput() {
-        $this->_pagestring = $this->_pageclass ? '<div class="' . $this->_pageclass . '">' : '<div>';
-        $this->_pagestring.= '<ul>';
+        $this->_pageHtml = $this->_pageClass ? '<div class="' . $this->_pageClass . '">' : '<div>';
+        $this->_pageHtml .= '<ul>';
         $this->_buildOutputPageList();
-        $this->_pagestring .= '</ul></div>';
+        $this->_pageHtml .= '</ul></div>';
     }
 
+    /**
+     *
+     */
     private function _buildOutputPageList() {
-        $pagemin = 1;
-        $pagemax = $this->_total_pages;
-        
-        if( $this->_current_page != 1 ) {
-            $prev = $this->_current_page-1 > 1 ? $this->_current_page-1 : 1;
-            $this->_pagestring .= "<li><a href=\"{$this->_current_url}1\">".$this->first_page."</a></li>
-            <li><a href=\"{$this->_current_url}".$prev."\">".$this->prev_page."</a></li>";
+        $pageMin = 1;
+        $pageMax = $this->_totalPage;
+        if ( $this->_currentPage != 1 ) {
+            $prev = $this->_currentPage - 1 > 1 ? $this->_currentPage - 1 : 1;
+            $this->_pageHtml .= "<li><a href=\"{$this->_currentUrl}1\">" . $this->firstPageLabel . "</a></li>
+            <li><a href=\"{$this->_currentUrl}" . $prev . "\">" . $this->prevPageLabel . "</a></li>";
         } else {
-            $this->_pagestring .= "<li class=\"disabled\"><a href=\"javascript:;\">".$this->first_page."</a></li>
-            <li class=\"disabled\"><a href=\"javascript:;\">".$this->prev_page."</a></li>";
+            $this->_pageHtml .= "<li class=\"disabled\"><a href=\"javascript:;\">" . $this->firstPageLabel . "</a></li>
+            <li class=\"disabled\"><a href=\"javascript:;\">" . $this->prevPageLabel . "</a></li>";
         }
-        
         //Ensure page offset number
-        if($this->_total_pages > $this->_pagelen){
-            if ($this->_current_page <= $this->_pageoffset) {
-                $pagemin = 1;
-                $pagemax = $this->_pagelen;
+        if ( $this->_totalPage > $this->_pageLen ) {
+            if ( $this->_currentPage <= $this->_pageOffset ) {
+                $pageMin = 1;
+                $pageMax = $this->_pageLen;
             } else {
-                if($this->_current_page + $this->_pageoffset >= $this->_total_pages + 1){
-                    $pagemin = $this->_total_pages - $this->_pagelen + 1;
-                    $pagemax = $this->_total_pages;
+                if ( $this->_currentPage + $this->_pageOffset >= $this->_totalPage + 1 ) {
+                    $pageMin = $this->_totalPage - $this->_pageLen + 1;
+                    $pageMax = $this->_totalPage;
                 } else {
-                    $pagemin = $this->_current_page - $this->_pageoffset;
-                    $pagemax = $this->_current_page + $this->_pageoffset;
+                    $pageMin = $this->_currentPage - $this->_pageOffset;
+                    $pageMax = $this->_currentPage + $this->_pageOffset;
                 }
             }
         }
-
-        for($i = $pagemin; $i <= $pagemax; $i++){
-            if($i == $this->_current_page){
-                $this->_pagestring .= '<li class="active"><a href="javascript:;">'.$i.'</a></li>';
+        for ( $i = $pageMin; $i <= $pageMax; $i ++ ) {
+            if ( $i == $this->_currentPage ) {
+                $this->_pageHtml .= '<li class="active"><a href="javascript:;">' . $i . '</a></li>';
             } else {
-                $this->_pagestring .= "<li><a href=\"{$this->_current_url}{$i}\">$i</a></li>";
+                $this->_pageHtml .= "<li><a href=\"{$this->_currentUrl}{$i}\">$i</a></li>";
             }
         }
-
-        if( $this->_current_page != $this->_total_pages){
-            $next = $this->_current_page+1 > $this->_total_pages ? $this->_total_pages : $this->_current_page+1;
-            $this->_pagestring .= "
-                <li><a href=\"{$this->_current_url}". $next ."\">".$this->next_page."</a></li>
-                <li><a href=\"{$this->_current_url}{$this->_total_pages}\">".$this->last_page."</a></li>";
+        if ( $this->_currentPage != $this->_totalPage ) {
+            $next = $this->_currentPage + 1 > $this->_totalPage ? $this->_totalPage : $this->_currentPage + 1;
+            $this->_pageHtml .= "
+                <li><a href=\"{$this->_currentUrl}" . $next . "\">" . $this->nextPageLabel . "</a></li>
+                <li><a href=\"{$this->_currentUrl}{$this->_totalPage}\">" . $this->lastPageLabel . "</a></li>";
         } else {
-            $this->_pagestring .= "
-                <li class=\"disabled\"><a href=\"javascript:;\">".$this->next_page."</a></li>
-                <li class=\"disabled\"><a href=\"javascript:;\">".$this->last_page."</a></li>";
+            $this->_pageHtml .= "
+                <li class=\"disabled\"><a href=\"javascript:;\">" . $this->nextPageLabel . "</a></li>
+                <li class=\"disabled\"><a href=\"javascript:;\">" . $this->lastPageLabel . "</a></li>";
         }
     }
-
 }

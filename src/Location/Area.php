@@ -1,20 +1,21 @@
 <?php
+namespace LancerHe\Library\Location;
+
 /**
- * 标准国家区位代码
+ * Class Area
  *
- * @category Library
- * @package  Location
- * @author   Lancer He <lancer.he@gmail.com>
- * @version  1.0 
- * @since    2014-11-07
+ * @package LancerHe\Library\Location
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Location;
-
 Class Area {
+    /**
+     * @var array
+     */
+    private $_area = [];
 
-    private $_area = array();
-
+    /**
+     * Area constructor.
+     */
     public function __construct(){
         $this->_area[110000] = array("code"=>"110000","name"=>"北京市");
         $this->_area[110100] = array("code"=>"110100","name"=>"市辖区");
@@ -3538,25 +3539,45 @@ Class Area {
         $this->_area[901301] = array("code"=>"901301","name"=>"海外地区");
     }
 
+    /**
+     * @param $code
+     * @return bool
+     */
     private function _get($code){
         return isset($this->_area[$code]) ? $this->_area[$code] : false;
     }
 
+    /**
+     * @param $code
+     * @return bool
+     */
     public function getArea($code) {
         $area = $this->_get($code);
         return $area ? $area['name'] : false;
     }
 
+    /**
+     * @param $code
+     * @return bool
+     */
     public function getCity($code){
         $code = substr($code, 0, 4).'00';
         return $this->getArea($code);
     }
 
+    /**
+     * @param $code
+     * @return bool
+     */
     public function getProvince($code){
         $code = substr($code, 0, 2).'0000';
         return $this->getArea($code);
     }
 
+    /**
+     * @param $code
+     * @return string
+     */
     public function getPath($code){
         $path = $this->getProvince($code);
         $city = $this->getCity($code);

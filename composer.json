@@ -1,6 +1,6 @@
 {
     "name" : "lancerhe/php-library",
-    "description" : "php library.",
+    "description" : "PHP common library.",
     "authors" : [
         {
             "name" : "Lancer He",
@@ -18,12 +18,12 @@
     },
     "autoload" : {
         "psr-4" : {
-            "Library\\" : "src/"
+            "LancerHe\\Library\\" : "src/"
         }
     },
     "autoload-dev" : {
         "psr-4" : {
-            "Library\\Test\\" : "tests/"
+            "LancerHe\\Library\\Test\\" : "tests/"
         }
     }
 }

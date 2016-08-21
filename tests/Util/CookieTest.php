@@ -1,19 +1,18 @@
 <?php
+namespace LancerHe\Library\Tests\Util;
+
+use LancerHe\Library\Util\Cookie;
+
 /**
- * Cookie Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2015-02-12
+ * Class CookieTest
+ *
+ * @package LancerHe\Library\Tests\Util
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Tests\Util;
-
-use Library\Util\Cookie;
-
 class CookieTest extends \PHPUnit_Framework_TestCase {
-
     public function setUp() {
         parent::setUp();
-        Cookie::$data = array();
+        Cookie::$data = [];
     }
 
     /**
@@ -49,6 +48,6 @@ class CookieTest extends \PHPUnit_Framework_TestCase {
         Cookie::set('act', 'mytip');
         Cookie::del('ace');
         $this->assertEquals(false, Cookie::has('ace'));
-        $this->assertEquals(true , Cookie::has('act'));
+        $this->assertEquals(true, Cookie::has('act'));
     }
 }

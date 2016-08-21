@@ -1,16 +1,15 @@
 <?php
+namespace LancerHe\Library\Tests\Util;
+
+use LancerHe\Library\Util\Timer;
+
 /**
- * Timer Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2015-01-24
+ * Class TimerTest
+ *
+ * @package LancerHe\Library\Tests\Util
+ * @author  Lancer He <lancer.he@gmail.com>
  */
-
-namespace Library\Tests\Util;
-
-use Library\Util\Timer;
-
 class TimerTest extends \PHPUnit_Framework_TestCase {
-
     /**
      * @test
      */
